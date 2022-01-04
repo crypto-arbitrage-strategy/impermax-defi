@@ -1,1 +1,1 @@
-from to_checksum_address import to_checksum_address
+from utils.to_checksum_address import to_checksum_address

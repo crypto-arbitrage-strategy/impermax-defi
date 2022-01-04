@@ -4,7 +4,7 @@
 # @Author   : Benedict
 # @File     : __init__.py
 
-from gas_calculator import GasCalculator
-from gas_price_multiplier import GasPriceMultiplier
-from profit import Profit
-from transaction import Transaction
+from modules.gas_calculator import GasCalculator
+from modules.gas_price_multiplier import GasPriceMultiplier
+from modules.profit import Profit
+from modules.transaction import Transaction
