@@ -3,8 +3,11 @@
 # @Time     : 12/26/21 2:22 PM
 # @Author   : Benedict
 # @File     : gas_calculator.py
+import web3.contract
 
 from gas_price_multiplier import GasPriceMultiplier
+from utils.web3obj import web3obj
+from utils import to_checksum_address
 
 
 class Observer(object):
@@ -14,10 +17,11 @@ class Observer(object):
 
 
 class GasCalculator(Observer):
-    def __init__(self, datasource: GasPriceMultiplier):
+    def __init__(self, datasource: GasPriceMultiplier, web3=web3obj):
         self.gas_price = 0
         self.gas_amount = 0
         self.datasource = datasource
+        self.web3 = web3
 
     def set_gas_price(self, multiplier: float):
         self.gas_price = self.get_average_gas_price() * multiplier
@@ -28,10 +32,12 @@ class GasCalculator(Observer):
         :return:
             average gas price
         """
-        return 1  # TODO: For testing, we will return 1 for now
+        gas_price = self.web3.eth.gasPrice
+        return gas_price
 
-    def estimate_gas_amount(self) -> int:
-        pass
+    @staticmethod
+    def estimate_gas_amount() -> int:  # TODO write a function a estimate the gas amount
+        return 500000
 
     def set_estimate_amount(self):
         self.gas_amount = self.estimate_gas_amount() * 1.05  # 5% extra
@@ -49,3 +55,4 @@ if __name__ == '__main__':
     gfc = GasCalculator(gpm)
     gpm.add_observer(gfc)
     gpm.set_multiplier(1.1)
+    gfc.get_average_gas_price()

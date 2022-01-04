@@ -7,7 +7,6 @@
 #             should be paid for the transaction.(Using multiplier way)
 #             The multiplier is combined with gas_calculator.py as a whole obverser pattern module.
 
-
 class Subject:
     def __init__(self):
         self.__observers = []
