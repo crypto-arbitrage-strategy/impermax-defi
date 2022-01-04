@@ -5,7 +5,7 @@
 # @File     : gas_calculator.py
 import web3.contract
 
-from gas_price_multiplier import GasPriceMultiplier
+from modules.gas_price_multiplier import GasPriceMultiplier
 from utils.web3obj import web3obj
 from utils import to_checksum_address
 
