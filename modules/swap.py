@@ -16,6 +16,7 @@ class Swap(ABC):
         self.router_contract = None
         self.private_key = private_key
         self.address = address
+        self.token_address = read_json('address/token.json')
 
 
 class Solarbean(Swap):
@@ -30,12 +31,17 @@ class Solarbean(Swap):
         functions = self.router_contract.all_functions()
         return functions
 
-    def swap_solar_for_eth(self, amount_in: int,
-                           sender_address: str, amount_out_min: int = 0,
-                           path: list = [Web3.toChecksumAddress("6bd193ee6d2104f14f94e2ca6efefae561a4334b"),
-                                         Web3.toChecksumAddress("98878b06940ae243284ca214f92bb71a2b032b8a")],
+    #TODO: add aprrove function, right now we need to approve it manually
+    def swap_exact_tokens_for_eth(self, amount_in: int,
+                                  sender_address: str,
+                                  out_token: str,
+                                  in_token: str,
+                                  # path: list = [Web3.toChecksumAddress("98878b06940ae243284ca214f92bb71a2b032b8a"),
+                                  #               Web3.toChecksumAddress("6bd193ee6d2104f14f94e2ca6efefae561a4334b"),
+                                  #               ],
+                                  amount_out_min: int = 0,
 
-                           ) -> dict:
+                                  ) -> dict:
 
         """
         :param sender_address:
@@ -52,13 +58,15 @@ class Solarbean(Swap):
             amount_in = int(amount_in * 1e18)
             amount_out_min = int(amount_out_min * 1e18)
             nonce = self.web3.eth.get_transaction_count(sender_address)
+            path = [Web3.toChecksumAddress(self.token_address[in_token]),
+                    Web3.toChecksumAddress(self.token_address[out_token])]
             txn = self.router_contract.functions.swapExactTokensForETH(amount_in, amount_out_min, path,
                                                                        to=sender_address,
                                                                        deadline=int(deadline),
                                                                        ).buildTransaction({
                 'from': sender_address,
-                'value': amount_in,
-                'gas': 50000,
+                'value': 0,
+                'gas': 500000,
                 'gasPrice': self.web3.eth.gasPrice,
                 'nonce': nonce,
             })
@@ -70,19 +78,9 @@ class Solarbean(Swap):
         except Exception as e:
             return {400: e}
 
-    # def get_price_input(self,
-    #     token0:str, # input token
-    #     token1:str,  # output token
-    #     qty: int,
-    #     fee: int = None,
-    # ) -> int:
-    #     self.router_contract.functions.SwapExactTokensForEth(amount_in, amount_out_min, path,
-    #                                                          deadline=deadline,
-    #                                                          to=sender_address, ).call()
-    #
-
 
 if __name__ == '__main__':
     solarbean = Solarbean(PRIVATE_KEY, ADDRESS)
     print(solarbean.get_all_functions())
-    print(solarbean.swap_solar_for_eth(amount_in=0.0001, sender_address=ADDRESS))
+    print(
+        solarbean.swap_exact_tokens_for_eth(amount_in=0.01, sender_address=ADDRESS, in_token='SOLAR', out_token='MOVR'))
