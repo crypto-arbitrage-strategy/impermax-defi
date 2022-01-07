@@ -24,7 +24,7 @@ class BountyQuery:
                               '0x2748d9d4e7379d5d29ca8887aeff929912ff06d8':'MIM/MOVR',
                               '0x24e19bd8477077b80de25ee7fc9f7a67d89d8009':'WBTC/MOVR'}
         # self.test_contract = self.web3.eth.contract(address=Web3.toChecksumAddress([*self.contract_dict.keys()][0]), abi=open(self.abi).read())
-        self.test_contract = self.web3.eth.contract(address=to_checksum_address('0x899caad2d29eff3b628503a85dae736b5c4d1671'), abi=open(self.abi).read())
+        self.test_contract = self.web3.eth.contract(address=to_checksum_address('0x899caad2d29eff3b628503a85dae736b5c4d1671'), abi=self.abi)
 
     def connect_web3(self, provider_url):
         web3 = Web3(Web3.HTTPProvider(provider_url))
@@ -36,7 +36,7 @@ class BountyQuery:
         return web3
 
     def get_bounty(self, address):
-        impermax_contract = self.web3.eth.contract(address=Web3.toChecksumAddress(address), abi=open(self.abi).read())
+        impermax_contract = self.web3.eth.contract(address=to_checksum_address(address), abi=self.abi)
         reward = self.web3.fromWei(impermax_contract.functions.getReward().call(), 'ether')
         reinvest_rate = self.web3.fromWei(impermax_contract.functions.REINVEST_BOUNTY().call(), 'ether')
         bounty = round(reward * reinvest_rate, 5)
