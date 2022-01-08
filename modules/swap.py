@@ -82,5 +82,5 @@ class Solarbean(Swap):
 if __name__ == '__main__':
     solarbean = Solarbean(PRIVATE_KEY, ADDRESS)
     print(solarbean.get_all_functions())
-    print(
-        solarbean.swap_exact_tokens_for_eth(amount_in=0.01, sender_address=ADDRESS, in_token='SOLAR', out_token='MOVR'))
+    # print(
+    #     solarbean.swap_exact_tokens_for_eth(amount_in=0.01, sender_address=ADDRESS, in_token='SOLAR', out_token='MOVR'))

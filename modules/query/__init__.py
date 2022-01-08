@@ -5,5 +5,5 @@
 # @File     : __init__.py.py
 
 from .bonus_query import BonusQuery
-from .price_query import PriceQuery
-
+# from .price_query import
+from .competitors_query import CompetitorsQuery
