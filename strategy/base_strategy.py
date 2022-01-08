@@ -8,7 +8,7 @@
 from web3 import Web3
 import os
 from modules import Profit, Transaction
-
+from modules.query import CompetitorsQuery
 
 class BaseStrategy:  # the prototype of strategy, without considering other participants
     def __init__(self, web3: Web3, contract_address: str, contract_abi: list, threshold: int, profit: Profit):
@@ -20,3 +20,6 @@ class BaseStrategy:  # the prototype of strategy, without considering other part
     def run(self):
         if self.profit.get_profit() > self.threshold:
             self.transaction.trigger()
+
+    def get_interval(self):
+        return self.CompetitorsQuery.get_interval()
