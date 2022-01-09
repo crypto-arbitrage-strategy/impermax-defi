@@ -6,6 +6,8 @@ def read_json(file_path):
         data = json.load(f)
     return data
 
+def read_impermax_pairs_address(pair:str)->str:
+    return read_json('address/contracts.json')["IMPERMAX"][pair]["address"]
 
 if __name__ == '__main__':
-    print(read_json('abi/solarbeam.json'))
+    print(read_impermax_pairs_address('ETH/MOVR'))

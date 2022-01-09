@@ -8,18 +8,10 @@ from utils import web3obj, to_checksum_address, read_json
 from abc import ABC
 from web3 import Web3
 from settings import PRIVATE_KEY, ADDRESS
+from modules import Contract
 
 
-class Swap(ABC):
-    def __init__(self, private_key, address):
-        self.web3 = web3obj
-        self.router_contract = None
-        self.private_key = private_key
-        self.address = address
-        self.token_address = read_json('address/token.json')
-
-
-class Solarbean(Swap):
+class Solarbean(Contract, ABC):
     def __init__(self, private_key, address):
         super().__init__(private_key, address)
         router_contract = '0xaa30ef758139ae4a7f798112902bf6d65612045f'
@@ -27,11 +19,8 @@ class Solarbean(Swap):
         self.router_contract = self.web3.eth.contract(address=to_checksum_address(router_contract),
                                                       abi=self.abi)
 
-    def get_all_functions(self):
-        functions = self.router_contract.all_functions()
-        return functions
 
-    #TODO: add aprrove function, right now we need to approve it manually
+    # TODO: add aprrove function, right now we need to approve it manually
     def swap_exact_tokens_for_eth(self, amount_in: int,
                                   sender_address: str,
                                   out_token: str,

@@ -7,4 +7,5 @@
 from modules.gas_calculator import GasCalculator
 from modules.gas_price_multiplier import GasPriceMultiplier
 from modules.profit import Profit
-from modules.transaction import Transaction
+from modules.impermax import Impermax
+from modules.contract import Contract
