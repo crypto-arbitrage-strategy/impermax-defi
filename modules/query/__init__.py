@@ -4,6 +4,6 @@
 # @Author   : Benedict
 # @File     : __init__.py.py
 
-from .bonus_query import BonusQuery
+from .bounty_query import BountyQuery
 # from .price_query import
 from .competitors_query import CompetitorsQuery

@@ -4,7 +4,7 @@
 # @Author   : Benedict
 # @File     : profit.py
 
-from .query import bonus_query, price_query
+from .query import bounty_query, price_query
 from .gas_calculator import GasCalculator
 
 
@@ -20,6 +20,6 @@ class Profit(object):
         :return: profit
         """
         price = price_query(base_token)
-        bonus = bonus_query(base_token)
+        bonus = bounty_query(base_token)
         profit = (self.price - price) * self.quantity * bonus
         return profit

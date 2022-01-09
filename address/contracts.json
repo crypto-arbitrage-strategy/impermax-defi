@@ -1,0 +1,16 @@
+{
+  "IMPERMAX": {
+    "ETH/MOVR": {
+      "address": "0x899caad2d29eff3b628503a85dae736b5c4d1671"
+    },
+    "FRAX/MOVR": {
+      "address": "0x35e8f2d87821a5149d92833390880f65911ad4d0"
+    },
+    "MIM/MOVR": {
+      "address": "0x2748d9d4e7379d5d29ca8887aeff929912ff06d8"
+    },
+    "WBTC/MOVR": {
+      "address": "0x24e19bd8477077b80de25ee7fc9f7a67d89d8009"
+    }
+  }
+}
