@@ -11,6 +11,9 @@
     },
     "WBTC/MOVR": {
       "address": "0x24e19bd8477077b80de25ee7fc9f7a67d89d8009"
+    },
+    "ETH/WMOVR": {
+      "address": "0xdb45ddce0216f7920cfbcbe26804c6e50b667960"
     }
   }
 }

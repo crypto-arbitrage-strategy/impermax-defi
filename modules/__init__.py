@@ -4,8 +4,8 @@
 # @Author   : Benedict
 # @File     : __init__.py
 
-from modules.gas_calculator import GasCalculator
+from modules.gas_calculator import GasCalculator, Observer
 from modules.gas_price_multiplier import GasPriceMultiplier
 from modules.profit import Profit
-from modules.impermax import Impermax
-from modules.contract import Contract
+from modules.contracts.impermax import Impermax
+from modules.contracts.contract import Contract

@@ -7,14 +7,14 @@
 
 from web3 import Web3, HTTPProvider
 from utils import read_json, to_checksum_address, read_impermax_pairs_address
-from contract import Contract
+from modules.contracts.contract import Contract
 from settings import PRIVATE_KEY, ADDRESS
 import asyncio
 import threading
 
 
 class Impermax(Contract):
-    def __init__(self, private_key, address):
+    def __init__(self, private_key=PRIVATE_KEY, address=ADDRESS):
         super().__init__(private_key, address)
         self.abi = read_json('abi/impermax.json')
         contract_address = read_impermax_pairs_address("ETH/MOVR")
