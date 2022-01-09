@@ -18,10 +18,10 @@ class Observer(object):
 
 class GasCalculator(Observer):
     def __init__(self, datasource: GasPriceMultiplier, web3=web3obj):
-        self.gas_price = 0
-        self.gas_amount = 0
+        self.gas_amount = 500000
         self.datasource = datasource
         self.web3 = web3
+        self.gas_price = self.get_average_gas_price()
 
     def set_gas_price(self, multiplier: float):
         self.gas_price = self.get_average_gas_price() * multiplier
@@ -47,12 +47,11 @@ class GasCalculator(Observer):
         print("GasFeeCalculator got notified: gas_price = {}".format(self.gas_price))
 
     def get_total_fee(self) -> int:
-        return self.gas_amount * self.gas_price
+        return float(self.web3.fromWei(self.gas_amount * self.gas_price,"ether"))
 
 
 if __name__ == '__main__':
     gpm = GasPriceMultiplier()
     gfc = GasCalculator(gpm)
     gpm.add_observer(gfc)
-    gpm.set_multiplier(1.1)
-    gfc.get_average_gas_price()
+    print(gfc.get_total_fee())
