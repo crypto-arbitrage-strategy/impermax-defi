@@ -15,6 +15,7 @@ from modules.profit import Profit
 from settings import *
 import time
 import multiprocessing as mp
+from modules.error import TransactionsQueryError
 
 
 class BaseStrategy:
@@ -28,17 +29,41 @@ class BaseStrategy:
         self.interval = self.get_interval()
 
     def get_interval(self):
-        interval = self.competitors_query.get_recent_call_interval(self.pair, 10,
-                                                                   "0x9Ea0Eb775d02E84EcdebBEEC971d4cA47d091FA8")
-        self.interval = min(interval) * 0.9
-        return self.interval
+        try:
+            self.interval = min(self.competitors_query.get_recent_call_interval(self.pair, 10,
+                                                                                "0x9Ea0Eb775d02E84EcdebBEEC971d4cA47d091FA8"))
+
+            # if recent three transactions are triggered by me, we will increase by 1.1
+            if "0x9ea0eb775d02e84ecdebbeec971d4ca47d091fa8" not in set(
+                    i["from"] for i in self.competitors_query.get_recent_transactions("ETH/WMOVR", 3)):
+                self.interval *= 1.1
+            else:
+                self.interval = self.interval * 0.9
+            return self.interval
+        except TransactionsQueryError as e:
+            time.sleep(1)
+            print(e)
+            self.get_interval()  # try again
 
     def trigger_or_not(self):
         # binary random,probability is 0.7
-        if randint(0, 10) > 7:
-            return True
-        else:
-            return False
+        # if randint(0, 10) >= 3:
+        #     return True
+        # else:
+        #     return False
+        return True
+
+    def cheating_or_not(self):
+        try:
+            if "0x5d57D72EeEd82fc8cfce9ad9925e5bB2513b3107" not in set(
+                    i["from"] for i in self.competitors_query.get_recent_transactions("ETH/WMOVR", 3)):
+                return True
+            else:
+                return False
+        except TransactionsQueryError as e:
+            time.sleep(1)
+            print(e)
+            self.cheating_or_not()  # try again
 
     def sell_all_token(self):
         # get all token
@@ -51,13 +76,21 @@ class BaseStrategy:
         while True:
             recent_transaction = self.competitors_query.get_recent_call_timestamp(self.pair, 1)[0]
             recent_interval = time.time() - recent_transaction
+            self.get_interval()
+            print(f"get new interval: {self.interval}")
             if recent_interval > self.interval:
                 print("Plan to reinvest")
-                if self.profit.get_profit(self.pair) > 0:
+                if self.profit.get_profit(self.pair) > 0.00014:
                     print("Profit is bigger than the threshold, trigger reinvest")
                     if self.trigger_or_not():
                         print("Randomly trigger: True")
-                        self.impermax_contract.reinvest(self.pair)
+                        if self.cheating_or_not():  # decide whether to cheat
+                            if self.pair !="FRAX/MOVR":
+                                self.impermax_contract.reinvest_combo("FRAX/MOVR", self.pair)
+                            else:
+                                self.impermax_contract.reinvest(self.pair)
+                        else:
+                            self.impermax_contract.reinvest(self.pair)
                     else:
                         print("Randomly trigger: False")
                 else:
@@ -70,7 +103,6 @@ class BaseStrategy:
                 print(f"Trigger reinvest in {next_interval} seconds")
                 time.sleep(next_interval)
 
-
     def trigger_sell_all(self):
         while True:
             if time.localtime().tm_hour == 21:
@@ -79,24 +111,26 @@ class BaseStrategy:
             else:
                 print("Not time to sell all")
             print(f"Trigger sell all in next day")
-            time.sleep(24*60*60)
+            time.sleep(24 * 60 * 60)
 
 
 def reinvest(pair):
     strategy = BaseStrategy(pair)
     strategy.trigger_reinvest()
 
+
 def sell_all(pair):
     strategy = BaseStrategy(pair)
     strategy.trigger_sell_all()
+
 
 if __name__ == '__main__':
     # reinvest("ETH/MOVR")
     eth_movr = mp.Process(target=reinvest, args=("ETH/MOVR",))
     frax_movr = mp.Process(target=reinvest, args=("FRAX/MOVR",))
-    mim_movr= mp.Process(target=reinvest, args=("MIM/MOVR",))
+    mim_movr = mp.Process(target=reinvest, args=("MIM/MOVR",))
     wbtc_movr = mp.Process(target=reinvest, args=("WBTC/MOVR",))
-    sell_all = mp.Process(target=sell_all,args=("WBTC/MOVR",))
+    sell_all = mp.Process(target=sell_all, args=("WBTC/MOVR",))
     eth_movr.start()
     frax_movr.start()
     mim_movr.start()
