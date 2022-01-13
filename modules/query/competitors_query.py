@@ -17,26 +17,27 @@ class CompetitorsQuery:
         self.api_key = api_key
 
     def get_recent_transactions(self, pair: str, num: int, address: Union[list, str, None] = None) -> list:
-        contract_address = to_checksum_address(read_impermax_pairs_address(pair))
-        res = requests.get(
-            f'https://api-moonriver.moonscan.io/api?module=account&action=txlist&address={contract_address}&startblock=1&endblock=99999999&sort=asc&apikey={self.api_key}').json()
+        try:
+            contract_address = to_checksum_address(read_impermax_pairs_address(pair))
+            res = requests.get(
+                f'https://api-moonriver.moonscan.io/api?module=account&action=txlist&address={contract_address}&startblock=1&endblock=99999999&sort=asc&apikey={self.api_key}').json()
 
-        if res["status"] == "1":
-            print("Successfully get recent transactions")
+            if res["status"] == "1":
+                print("Successfully get recent transactions")
 
-            if not address:
-                res = res["result"][-num:]
-                return res
-            else:
-                if type(address) == str:
-                    address = [address.lower()]
+                if not address:
+                    res = res["result"][-num:]
+                    return res
                 else:
-                    address = list(map(lambda x: x.lower(), address))
-                res = res["result"]
-                res = [x for x in res if x["from"] in address]
-                res = res[-num:]
-                return res
-        else:
+                    if type(address) == str:
+                        address = [address.lower()]
+                    else:
+                        address = list(map(lambda x: x.lower(), address))
+                    res = res["result"]
+                    res = [x for x in res if x["from"] in address]
+                    res = res[-num:]
+                    return res
+        except requests.exceptions.ConnectionError:
             raise TransactionsQueryError("Failed to get recent transactions")
 
     def get_recent_call_timestamp(self, pair: str, num: int, address: Union[list, str, None] = None) -> List[int]:
@@ -67,4 +68,5 @@ class CompetitorsQuery:
 
 if __name__ == '__main__':
     cq = CompetitorsQuery("1RMNSD1YRGHX8TUKN5IFRT6NSXVVBQYPCF")
-    print(cq.get_recent_call_timestamp("ETH/WMOVR", 1))
+    a = cq.get_recent_call_interval("ETH/MOVR",10)
+    print(min(list(filter(lambda x: x > 0, a))))
