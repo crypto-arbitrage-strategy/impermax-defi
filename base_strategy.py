@@ -26,16 +26,25 @@ class BaseStrategy:
         self.swap_contract = swap.Solarbean()
         self.profit = Profit()
         self.impermax_contract = impermax.Impermax()
+        self.competitors_address_set = {"0x9ea0eb775d02e84ecdebbeec971d4ca47d091fa8",
+                                        "0xcc25Bcbe08E12E62113add458dE3b9375A511b63"}
         self.interval = self.get_interval()
+
+
+    # def update_competitors_address(self):
+    #     self.competitors_address_set
+    #     new_competitors_address_set = self.competit
 
     def get_interval(self):
         try:
-            self.interval = min(self.competitors_query.get_recent_call_interval(self.pair, 10,
-                                                                                "0x9Ea0Eb775d02E84EcdebBEEC971d4cA47d091FA8"))
-
+            interval = self.competitors_query.get_recent_call_interval(self.pair, 10,self.competitors_address_set)
+            self.interval = min(list(filter(lambda x: x > 30, interval)))
             # if recent three transactions are triggered by me, we will increase by 1.1
-            if "0x9ea0eb775d02e84ecdebbeec971d4ca47d091fa8" not in set(
-                    i["from"] for i in self.competitors_query.get_recent_transactions("ETH/WMOVR", 3)):
+
+            recent_address_set = set(
+                i["from"] for i in self.competitors_query.get_recent_transactions(self.pair, 3))
+            self.competitors_address_set = self.competitors_address_set.union(recent_address_set) - {ADDRESS}
+            if recent_address_set == {ADDRESS}:
                 self.interval *= 1.1
             else:
                 self.interval = self.interval * 0.9
@@ -57,9 +66,9 @@ class BaseStrategy:
         try:
             if "0x5d57D72EeEd82fc8cfce9ad9925e5bB2513b3107" not in set(
                     i["from"] for i in self.competitors_query.get_recent_transactions("ETH/WMOVR", 3)):
-                return True
-            else:
                 return False
+            else:
+                return True
         except TransactionsQueryError as e:
             time.sleep(1)
             print(e)
@@ -80,12 +89,12 @@ class BaseStrategy:
             print(f"get new interval: {self.interval}")
             if recent_interval > self.interval:
                 print("Plan to reinvest")
-                if self.profit.get_profit(self.pair) > 0.00014:
+                if self.profit.get_profit(self.pair) > 0.00004:
                     print("Profit is bigger than the threshold, trigger reinvest")
                     if self.trigger_or_not():
                         print("Randomly trigger: True")
                         if self.cheating_or_not():  # decide whether to cheat
-                            if self.pair !="FRAX/MOVR":
+                            if self.pair != "FRAX/MOVR":
                                 self.impermax_contract.reinvest_combo("FRAX/MOVR", self.pair)
                             else:
                                 self.impermax_contract.reinvest(self.pair)
@@ -100,6 +109,7 @@ class BaseStrategy:
             else:
                 print("Not time to reinvest")
                 next_interval = self.interval - recent_interval
+                next_interval = min(1200, next_interval)
                 print(f"Trigger reinvest in {next_interval} seconds")
                 time.sleep(next_interval)
 
@@ -125,7 +135,7 @@ def sell_all(pair):
 
 
 if __name__ == '__main__':
-    # reinvest("ETH/MOVR")
+    # reinvest("MIM/MOVR")
     eth_movr = mp.Process(target=reinvest, args=("ETH/MOVR",))
     frax_movr = mp.Process(target=reinvest, args=("FRAX/MOVR",))
     mim_movr = mp.Process(target=reinvest, args=("MIM/MOVR",))

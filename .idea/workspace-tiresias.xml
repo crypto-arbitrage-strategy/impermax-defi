@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f94d9997-665a-428f-ac20-310f55e20dc4" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/abi/erc20.json" beforeDir="false" afterPath="$PROJECT_DIR$/abi/erc20.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/contracts/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/contracts/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/contracts/erc20.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/contracts/erc20.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/query/competitors_query.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/query/competitors_query.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/strategy/base_strategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/base_strategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategy/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,13 +36,13 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/modules/query/price_query.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/address/contracts.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/modules/error.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/base_strategy.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/modules/__init__.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/modules/gas_calculator.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/modules/profit.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/modules/query/price_query.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/base_strategy.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/address/contracts.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/modules/error.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -260,7 +264,7 @@
       <workItem from="1641840573107" duration="315000" />
       <workItem from="1641840906767" duration="46000" />
       <workItem from="1641840988916" duration="413000" />
-      <workItem from="1641841744017" duration="141000" />
+      <workItem from="1641842619485" duration="2000" />
     </task>
     <servers />
   </component>
@@ -277,7 +281,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -301,18 +304,18 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/impermax_defi$impermax.coverage" NAME="impermax Coverage Results" MODIFIED="1641693609025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
-    <SUITE FILE_PATH="coverage/impermax_defi$bounty_query.coverage" NAME="bounty_query Coverage Results" MODIFIED="1641746773691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/impermax_defi$base_strategy.coverage" NAME="base_strategy Coverage Results" MODIFIED="1641841125128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/impermax_defi$read_json.coverage" NAME="read_json Coverage Results" MODIFIED="1641682612045" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/impermax_defi$web3.coverage" NAME="web3obj 覆盖结果" MODIFIED="1640832169460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules" />
     <SUITE FILE_PATH="coverage/impermax_defi$competitors_query.coverage" NAME="competitors_query Coverage Results" MODIFIED="1641840770221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/impermax_defi$test.coverage" NAME="test Coverage Results" MODIFIED="1641763406245" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/strategy" />
     <SUITE FILE_PATH="coverage/impermax_defi$swap.coverage" NAME="swap Coverage Results" MODIFIED="1641681545068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/impermax_defi$to_checksum_address.coverage" NAME="to_checksum_address 覆盖结果" MODIFIED="1640968095993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/impermax_defi$web3.coverage" NAME="web3obj 覆盖结果" MODIFIED="1640832169460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules" />
-    <SUITE FILE_PATH="coverage/impermax_defi$web3obj.coverage" NAME="web3obj 覆盖结果" MODIFIED="1640959554187" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules" />
-    <SUITE FILE_PATH="coverage/impermax_defi$base_strategy.coverage" NAME="base_strategy Coverage Results" MODIFIED="1641841125128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
-    <SUITE FILE_PATH="coverage/impermax_defi$erc20.coverage" NAME="erc20 Coverage Results" MODIFIED="1641742408699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/impermax_defi$impermax.coverage" NAME="impermax Coverage Results" MODIFIED="1641693609025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/impermax_defi$profit.coverage" NAME="profit Coverage Results" MODIFIED="1641765829788" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/impermax_defi$bounty_query.coverage" NAME="bounty_query Coverage Results" MODIFIED="1641746773691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/impermax_defi$erc20.coverage" NAME="erc20 Coverage Results" MODIFIED="1641742408699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/impermax_defi$gas_calculator.coverage" NAME="gas_calculator Coverage Results" MODIFIED="1641054509634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules" />
-    <SUITE FILE_PATH="coverage/impermax_defi$read_json.coverage" NAME="read_json Coverage Results" MODIFIED="1641682612045" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/impermax_defi$web3obj.coverage" NAME="web3obj 覆盖结果" MODIFIED="1640959554187" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules" />
   </component>
 </project>

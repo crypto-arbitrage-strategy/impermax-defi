@@ -68,4 +68,5 @@ class CompetitorsQuery:
 
 if __name__ == '__main__':
     cq = CompetitorsQuery("1RMNSD1YRGHX8TUKN5IFRT6NSXVVBQYPCF")
-    print("0x9ea0eb775d02e84ecdebbeec971d4ca47d091fa8" in set(i["from"] for i in cq.get_recent_transactions("ETH/WMOVR", 3)))
+    a = cq.get_recent_call_interval("ETH/MOVR",10)
+    print(min(list(filter(lambda x: x > 0, a))))

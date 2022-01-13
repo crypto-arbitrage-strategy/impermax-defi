@@ -40,4 +40,4 @@ class Profit(object):
 
 if __name__ == '__main__':
     p = Profit()
-    print(p.get_profit("ETH/WMOVR"))
+    print(p.get_profit("MIM/MOVR"))
