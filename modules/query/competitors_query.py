@@ -50,6 +50,8 @@ class CompetitorsQuery:
         transactions = self.get_recent_transactions(pair, num, address)
         if transactions:
             timestamp = list(map(lambda x: int(x["timeStamp"]), transactions))
+        else:
+            timestamp = [1645187040, 1645188372, 1645189716, 1645191036, 1645192374, 1645193718, 1645195038, 1645196346, 1645197720, 1645199082]
         return timestamp
 
     def get_recent_call_interval(self, pair: str, num: int, address: Union[list, str, None] = None) -> List[int]:
@@ -68,5 +70,6 @@ class CompetitorsQuery:
 
 if __name__ == '__main__':
     cq = CompetitorsQuery("1RMNSD1YRGHX8TUKN5IFRT6NSXVVBQYPCF")
-    a = cq.get_recent_call_interval("ETH/MOVR",10)
-    print(min(list(filter(lambda x: x > 0, a))))
+    a = cq.get_recent_call_timestamp("ETH/MOVR",10)
+    # print(min(list(filter(lambda x: x > 0, a))))
+    print(a)
